@@ -1,104 +1,249 @@
 /* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --bg-primary: #fff;
+  --bg-secondary: #f6f6f6;
+  --sidebar-bg: #f7f7f7;
+  --sidebar-divider: #e3e7ea;
+  --primary: #1976d2;
+  --secondary: #424242;
+  --accent: #ffeb3b;
+  --text-main: #222;
+  --text-secondary: #555;
+  --border-color: #e4e7e9;
+  --button-bg: #1976d2;
+  --button-text: #fff;
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
-}
+/* Remove dark theme for this app for minimal light palette */
 
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+.notes-root {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background: var(--bg-primary);
+  color: var(--text-main);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Layout: sidebar + main */
+.notes-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 940px;
+  margin: 0 auto;
+  min-height: 82vh;
+  background: var(--bg-secondary);
+  box-shadow: 0 2.5px 16px 0 rgba(25, 118, 210, 0.035);
+  border-radius: 12px;
+  border: 1.5px solid var(--border-color);
+  margin-top: 44px;
+  margin-bottom: 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.notes-sidebar {
+  min-width: 215px;
+  max-width: 250px;
+  flex-shrink: 0;
+  background: var(--sidebar-bg);
+  border-right: 1.5px solid var(--sidebar-divider);
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  padding: 12px 4px 20px 14px;
   display: flex;
   flex-direction: column;
+}
+
+.sidebar-header {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  gap: 10px;
+  font-size: 1.05rem;
+  margin-bottom: 14px;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
-}
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+.sidebar-add {
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+  outline: none;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 900;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0 10px;
+  height: 30px;
+}
+.sidebar-add:active {
+  background: #1355a0;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1 1 0;
+  overflow-y: auto;
+}
+.sidebar-item {
+  padding: 7px 8px;
+  display: flex;
+  align-items: center;
+  transition: background 0.09s;
+  user-select: none;
+}
+.sidebar-item:hover,
+.sidebar-item.active {
+  background: var(--accent);
+  color: #222;
+}
+.sidebar-item .sidebar-delete {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: #bb2d3b;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.sidebar-item .sidebar-delete:active {
+  color: #8c1e25;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.notes-main {
+  flex: 1 1 0;
+  padding: 32px 30px 20px 32px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: #fff;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.note-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: stretch;
+}
+
+.note-title-input {
+  font-size: 1.25rem;
+  font-weight: 600;
+  background: #fafbfc;
+  border: none;
+  border-bottom: 2px solid var(--primary);
+  outline: none;
+  margin-bottom: 0.3em;
+  padding: 7px 8px;
+  color: #2d313a;
+  border-radius: 2.5px 2.5px 0 0;
+}
+
+.note-content-input {
+  min-height: 140px;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  color: var(--text-main);
+  background: #fff;
+  border: 1px solid #e4e7e9;
+  padding: 9px 10px;
+  margin-bottom: 10px;
+  transition: border 0.2s;
+}
+
+.note-content-input:focus,
+.note-title-input:focus {
+  border-color: var(--primary);
+}
+
+.btn-save {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 22px;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background: #e0e0e0;
+  color: #444;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 20px;
+  cursor: pointer;
+}
+
+.btn-delete {
+  color: #bb2d3b;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: left;
+  margin-left: 0;
+  margin-top: 0.7em;
+  padding: 0;
+}
+
+.notes-footer {
+  font-size: 13px;
+  color: #aaa;
+  border-top: 1px solid #eee;
+  padding: 8px 0 4px 0;
+  text-align: center;
+  letter-spacing: 0.02rem;
+}
+
+.note-empty {
+  margin: auto;
+  color: #888;
+  font-style: italic;
+  text-align: center;
+  padding-top: 70px;
+}
+
+@media (max-width: 700px) {
+  .notes-container {
+    flex-direction: column;
+    min-width: 0;
+    margin-top: 20px;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
   }
-  to {
-    transform: rotate(360deg);
+  .notes-sidebar {
+    border-right: none;
+    border-radius: 0;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: visible;
+    min-width: 0;
+    max-width: unset;
+    width: 100%;
+    padding: 11px 0 7px 10px;
+    margin-bottom: 0.4rem;
+  }
+  .sidebar-list {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .sidebar-item {
+    margin: 0 6px 0 0;
+    padding: 7px 13px;
+  }
+  .notes-main {
+    padding: 8px 4.5vw 3vw 4.5vw;
+    border-radius: 0;
+    min-height: 340px;
   }
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+@media (max-width: 470px) {
+  .notes-main {
+    padding: 3vw 1.7vw;
   }
 }
+
+/* Remove unneeded App.css styles from default template */
