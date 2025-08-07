@@ -1,0 +1,249 @@
+/* CSS Variables for Theme Management */
+:root {
+  --bg-primary: #fff;
+  --bg-secondary: #f6f6f6;
+  --sidebar-bg: #f7f7f7;
+  --sidebar-divider: #e3e7ea;
+  --primary: #1976d2;
+  --secondary: #424242;
+  --accent: #ffeb3b;
+  --text-main: #222;
+  --text-secondary: #555;
+  --border-color: #e4e7e9;
+  --button-bg: #1976d2;
+  --button-text: #fff;
+}
+
+/* Remove dark theme for this app for minimal light palette */
+
+.notes-root {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-main);
+}
+
+/* Layout: sidebar + main */
+.notes-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 940px;
+  margin: 0 auto;
+  min-height: 82vh;
+  background: var(--bg-secondary);
+  box-shadow: 0 2.5px 16px 0 rgba(25, 118, 210, 0.035);
+  border-radius: 12px;
+  border: 1.5px solid var(--border-color);
+  margin-top: 44px;
+  margin-bottom: 16px;
+}
+
+.notes-sidebar {
+  min-width: 215px;
+  max-width: 250px;
+  flex-shrink: 0;
+  background: var(--sidebar-bg);
+  border-right: 1.5px solid var(--sidebar-divider);
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  padding: 12px 4px 20px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+  margin-bottom: 14px;
+}
+
+.sidebar-add {
+  border: none;
+  outline: none;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+  padding: 0 10px;
+  height: 30px;
+}
+.sidebar-add:active {
+  background: #1355a0;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1 1 0;
+  overflow-y: auto;
+}
+.sidebar-item {
+  padding: 7px 8px;
+  display: flex;
+  align-items: center;
+  transition: background 0.09s;
+  user-select: none;
+}
+.sidebar-item:hover,
+.sidebar-item.active {
+  background: var(--accent);
+  color: #222;
+}
+.sidebar-item .sidebar-delete {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: #bb2d3b;
+}
+
+.sidebar-item .sidebar-delete:active {
+  color: #8c1e25;
+}
+
+.notes-main {
+  flex: 1 1 0;
+  padding: 32px 30px 20px 32px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: #fff;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.note-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: stretch;
+}
+
+.note-title-input {
+  font-size: 1.25rem;
+  font-weight: 600;
+  background: #fafbfc;
+  border: none;
+  border-bottom: 2px solid var(--primary);
+  outline: none;
+  margin-bottom: 0.3em;
+  padding: 7px 8px;
+  color: #2d313a;
+  border-radius: 2.5px 2.5px 0 0;
+}
+
+.note-content-input {
+  min-height: 140px;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  color: var(--text-main);
+  background: #fff;
+  border: 1px solid #e4e7e9;
+  padding: 9px 10px;
+  margin-bottom: 10px;
+  transition: border 0.2s;
+}
+
+.note-content-input:focus,
+.note-title-input:focus {
+  border-color: var(--primary);
+}
+
+.btn-save {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 22px;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background: #e0e0e0;
+  color: #444;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 20px;
+  cursor: pointer;
+}
+
+.btn-delete {
+  color: #bb2d3b;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: left;
+  margin-left: 0;
+  margin-top: 0.7em;
+  padding: 0;
+}
+
+.notes-footer {
+  font-size: 13px;
+  color: #aaa;
+  border-top: 1px solid #eee;
+  padding: 8px 0 4px 0;
+  text-align: center;
+  letter-spacing: 0.02rem;
+}
+
+.note-empty {
+  margin: auto;
+  color: #888;
+  font-style: italic;
+  text-align: center;
+  padding-top: 70px;
+}
+
+@media (max-width: 700px) {
+  .notes-container {
+    flex-direction: column;
+    min-width: 0;
+    margin-top: 20px;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
+  .notes-sidebar {
+    border-right: none;
+    border-radius: 0;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: visible;
+    min-width: 0;
+    max-width: unset;
+    width: 100%;
+    padding: 11px 0 7px 10px;
+    margin-bottom: 0.4rem;
+  }
+  .sidebar-list {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .sidebar-item {
+    margin: 0 6px 0 0;
+    padding: 7px 13px;
+  }
+  .notes-main {
+    padding: 8px 4.5vw 3vw 4.5vw;
+    border-radius: 0;
+    min-height: 340px;
+  }
+}
+
+@media (max-width: 470px) {
+  .notes-main {
+    padding: 3vw 1.7vw;
+  }
+}
+
+/* Remove unneeded App.css styles from default template */
